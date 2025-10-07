@@ -1,0 +1,47 @@
+plugins {
+    id 'fabric-loom' version '1.6.6'
+    id 'maven-publish'
+}
+
+group = 'com.example.bandana'
+version = '1.0.0'
+archivesBaseName = 'bandana'
+
+minecraft {
+    // Fabric Loomが自動で管理
+}
+
+repositories {
+    maven {
+        name = "Fabric"
+        url = "https://maven.fabricmc.net/"
+    }
+    maven {
+        name = "ObjRenderer"
+        url = "https://maven.natanfudge.dev/releases"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:1.21.4"
+    mappings "net.fabricmc:yarn:1.21.4+build.1:v2"
+    modImplementation "net.fabricmc:fabric-loader:0.15.7"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:0.97.1+1.21.4"
+
+    // ObjRenderer
+    modImplementation "com.natanfudge:ObjRenderer:3.0.0+1.21.4"
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/bandana.accesswidener")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
